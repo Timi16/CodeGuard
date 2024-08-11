@@ -1,25 +1,32 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { analyzeSecrets } from './analyzers/secretAnalyzer';
 
 // This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+    console.log('Congratulations, your extension "codeguard" is now active!');
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "codeguard" is now active!');
+    // Register the "Analyze Code for Secrets" command
+    const analyzeCommand = vscode.commands.registerCommand('codeguard.analyzeSecrets', async () => {
+        const editor = vscode.window.activeTextEditor;
+        if (editor) {
+            try {
+                await analyzeSecrets(editor.document.uri);
+            } catch (error) {
+                vscode.window.showErrorMessage('Failed to analyze secrets: ' + (error as Error).message);
+            }
+        } else {
+            vscode.window.showInformationMessage('No active editor detected.');
+        }
+    });
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('codeguard.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from CodeGuard!');
-	});
+    // Register the "Hello World" command
+    const helloWorldCommand = vscode.commands.registerCommand('codeguard.helloWorld', () => {
+        vscode.window.showInformationMessage('Hello World from CodeGuard!');
+    });
 
-	context.subscriptions.push(disposable);
+    // Add commands to the context subscriptions
+    context.subscriptions.push(analyzeCommand);
+    context.subscriptions.push(helloWorldCommand);
 }
 
 // This method is called when your extension is deactivated
