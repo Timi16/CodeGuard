@@ -1,7 +1,7 @@
 {
   "name": "codeguard",
   "displayName": "CodeGuard",
-  "description": "The Web Framework Security Scanner is a powerful and advanced security tool designed for developers working with various web frameworks across multiple programming languages. This extension integrates static analysis tools to automatically detect and report common security vulnerabilities within your codebase. It supports popular web frameworks like Django and Flask for Python, Express.js and React for JavaScript, Spring and Play for Java, Gin and Echo for Go, and Ruby on Rails.",
+  "description": "The Web Framework Security Scanner is a powerful and advanced security tool designed for developers working with various web frameworks across multiple programming languages. This extension integrates static analysis tools to automatically detect and report common security vulnerabilities within your codebase.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.92.0"
@@ -11,7 +11,8 @@
   ],
   "activationEvents": [
     "onCommand:codeguard.analyzeSecrets",
-    "onCommand:codeguard.helloWorld"
+    "onCommand:codeguard.analyzeAdvancedXSS",
+    "onCommand:codeguard.analyzeAdvancedSQLInjection"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -21,28 +22,14 @@
         "title": "Analyze Code for Secrets"
       },
       {
-        "command": "codeguard.helloWorld",
-        "title": "Hello World"
+        "command": "codeguard.analyzeAdvancedXSS",
+        "title": "Analyze Code for Advanced XSS"
+      },
+      {
+        "command": "codeguard.analyzeAdvancedSQLInjection",
+        "title": "Analyze Code for Advanced SQL Injection"
       }
-    ],
-    "configuration": {
-      "type": "object",
-      "title": "CodeGuard Configuration",
-      "properties": {
-        "secretAnalyzer.secretPatterns": {
-          "type": "array",
-          "default": [
-            "API_KEY",
-            "SECRET_KEY",
-            "password",
-            "token",
-            "AWS_SECRET_ACCESS_KEY",
-            "JWT_SECRET"
-          ],
-          "description": "List of secret patterns to detect in code files."
-        }
-      }
-    }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -56,17 +43,17 @@
     "test": "vscode-test"
   },
   "devDependencies": {
+    "@types/vscode": "^1.92.0",
     "@types/mocha": "^10.0.7",
     "@types/node": "20.x",
-    "@types/vscode": "^1.92.0",
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.11.0",
-    "@vscode/test-cli": "^0.0.9",
-    "@vscode/test-electron": "^2.4.0",
     "eslint": "^8.57.0",
-    "ts-loader": "^9.5.1",
     "typescript": "^5.4.5",
+    "ts-loader": "^9.5.1",
     "webpack": "^5.92.1",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0"
   }
 }
