@@ -1,7 +1,7 @@
-CodeGuard
+**CodeGuard**
 CodeGuard is a powerful and advanced security tool designed to help developers detect common security vulnerabilities within their codebase. This extension integrates static analysis tools to automatically identify issues such as misplaced secrets, XSS vulnerabilities, SQL injections, and other security flaws.
 
-Features
+**Features**
 Secret Detection: Detects hardcoded API keys, secret keys, passwords, and tokens in your code to prevent accidental exposure of sensitive information.
 Cross-Site Scripting (XSS) Detection: Scans for potential XSS vulnerabilities in your web applications.
 SQL Injection Detection: Identifies code patterns that may be susceptible to SQL injection attacks.
@@ -13,10 +13,10 @@ JavaScript/TypeScript: Express.js, React
 Java: Spring, Play
 Go: Gin, Echo
 Ruby: Ruby on Rails
-Installation
+**Installation**
 Clone the repository or download the extension.
 Open the project in Visual Studio Code.
-Install dependencies:
+**Install dependencies**
 bash
 Copy code
 npm install
